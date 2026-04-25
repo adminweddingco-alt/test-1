@@ -203,6 +203,51 @@
             border-radius: 6px;
         }
 
+        #desktop-warning {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* 👈 ini penting */
+}
+
+.warning-box {
+    background: #111;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 300px;
+    font-family: 'Poppins', sans-serif; /* biar konsisten */
+}
+
+.warning-box h2 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.warning-box p {
+    font-weight: 300;
+    font-size: 14px;
+    opacity: 0.8;
+}
+/* TAMPILKAN kalau layar lebih dari mobile */
+@media (min-width: 768px) {
+    #desktop-warning {
+        display: flex;
+    }
+
+    body {
+        overflow: hidden; /* biar tidak bisa scroll */
+    }
+}
+
         /* Media queries - Responsive timeline on screens less than 600px wide */
         @media  screen and (max-width: 600px) {
 
