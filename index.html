@@ -1154,6 +1154,24 @@ oncontextmenu="return false"
 </div>
 
 <script>
+    
+function checkDevice() {
+    const warning = document.getElementById("desktop-warning");
+
+    if (window.innerWidth >= 768) {
+        warning.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    } else {
+        warning.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+
+window.addEventListener("load", checkDevice);
+window.addEventListener("resize", checkDevice);
+</script>
+            
+<script>
     function translatePage() {
       const elements = document.querySelectorAll('#content *'); // Memilih semua elemen di dalam div dengan id 'content'
       const targetLanguage = 'en'; // Inggris
