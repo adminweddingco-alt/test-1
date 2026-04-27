@@ -24,8 +24,8 @@
         rel="stylesheet">
     <style>
         body {
-            /* max-width: 375px; Lebar ponsel */
-            margin: 0 auto;   /* Tengah layar */
+            /* max-width: 10000px; */
+            margin: 0;   /* Tengah layar */
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
         }
@@ -195,65 +195,53 @@
             left: -16px;
         }
 
+        .welcome-box h1 {
+            font-size: 52px;
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        .welcome-box h2 {
+            margin: 0;
+        }
+
+        .welcome-box p {
+            font-size: 14px;
+            margin: 0;
+        }
+
         /* The actual content */
         .content {
             padding: 20px 30px;
-            background-color: white;
+            background-color: #f5e5c8;
             position: relative;
             border-radius: 6px;
         }
 
-        #desktop-warning {
-    display: none;
-    position: fixed;
-    z-index: 99999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    color: white;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: 'Poppins', sans-serif; /* 👈 ini penting */
-}
+        @media screen and (min-width: 1000px) {
+            body {
+             background-color: #f5e5c8; 
+            }
+            .welcome-box .photo-frame {
+                transform: translateY(20px);
+            }
+            .welcome-box {
+                margin: 0;
+                position: absolute;
+                left: 25.5px;              /* gak mentok kiri */
+                top: 50%;
+                transform: translateY(-50%);
+                max-width: 360px;        /* biar gak kepanjangan */
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+            }
 
-.warning-box {
-    background: #111;
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 300px;
-    font-family: 'Poppins', sans-serif; /* biar konsisten */
-}
-
-.warning-box h2 {
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.warning-box p {
-    font-weight: 300;
-    font-size: 14px;
-    opacity: 0.8;
-}
-/* TAMPILKAN kalau layar lebih dari mobile */
-@media (min-width: 768px) {
-    #desktop-warning {
-        display: flex !important;
-    }
-
-    body {
-        overflow: hidden; /* biar tidak bisa scroll */
-    }
-
-    #app {
-        display: none;
-    }
-}
+        }
 
         /* Media queries - Responsive timeline on screens less than 600px wide */
-        @media  screen and (max-width: 600px) {
+        @media screen and (max-width: 600px) {
 
             /* Place the timelime to the left */
             .timeline::after {
@@ -285,6 +273,28 @@
             .right {
                 left: 0%;
             }
+            
+        }
+
+        @media screen and (min-width: 425px) {
+            .welcome-box {
+                position: absolute;
+                left: 18px;              /* gak mentok kiri */
+                top: 50%;
+                transform: translateY(-50%) translateX(-10px);
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .welcome-box .photo-frame {
+                transform: translateY(60px) translateX(3px);
+            }
+
+            .welcome-box button {
+                transform: translateX(15px);
+            }
         }
     </style>
 
@@ -299,7 +309,8 @@
             background-color: rgb(255, 255, 255);
             height: 100vh;
             /* overflow-y: auto; */
-            /* position: relative; */
+            position: relative;
+
         }
 
         .custom-background {
@@ -362,22 +373,20 @@
 </head>
 
 <body 
-oncontextmenu="return false"
 >
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid main-wrapper">
+    <div class="row g-0">
         <!-- Sisi Kiri - Ukuran Penuh (Desktop Only) -->
-        <div id="desktop-warning">
-            <div class="warning-box">
-                <h2>Peringatan</h2>
-                <p>Undangan ini hanya bisa diakses melalui perangkat mobile.</p>
-            </div>
-        </div>
-                 
+        <div class="col-lg-8 d-none d-lg-block left-side">
+            <div class="left-content"></div>
+        </div>   
 
+        <!-- KANAN (UNDANGAN) -->
+        
+        <div class="col-12 col-lg-4 right-side">
+        
         <!-- Sisi Kanan - Ukuran Layar Smartphone -->
-        <div class="col-md-4 phone-screen p-0 m-0">
-
+        <div class="phone-screen p-0 m-0 ">
             
             <div class="row fixed-bottom" style="display: none" id="icon-bar">
                 <div class="col-md-4 ms-auto px-5" style="margin-bottom: 10px;">
@@ -413,14 +422,12 @@ oncontextmenu="return false"
             <div class="fixed-top">
                 <div class="output"></div>
             </div>
-
-            <div class="fixed-top">
-                <div class="text-center">
-                    <div class="" id="welcomeMessage"
-                        style="height:665px;">
+            <div>
+                <div class="">
+                    <div id="welcomeMessage" class="welcome-box">
                         <div class="photo-frame" style="text-align: center;">
-                            <img class="" style="margin-top: 55px; height: 212px; width: 132px; border-radius: 60px 60px 0px 0px; overflow: hidden;" 
-                            src="https://akad.in/storage/wedding/foto11765445555.jpg">
+                            <img class="" style="margin-top: 55px; height: 212px; width: 145px; border-radius: 60px 60px 0px 0px; overflow: hidden;" 
+                            src="./storage/wedding/Foto Utama.jpeg">
                         </div>
                         <h2 class="text-white" style="margin-top: 20px">
                             Pernikahan
@@ -435,29 +442,29 @@ oncontextmenu="return false"
                             mas_thohir mb_minhah
                         </h2>
                         <p class="text-white">Silakan klik tombol di bawah untuk membuka undangan Pernikahan.</p>
-                        <button id="bukaUndangan" class="btn btn-color-2 text-color-1">Buka Undangan</button>
+                        <button id="bukaUndangan" class="btn btn-color-2 text-color-1" style="text-align: center; width: 350px;">Buka Undangan</button>
                         <script>
                             document.getElementById("bukaUndangan").onclick = function () {
-                                // Mendapatkan elemen dengan kelas 'fixed-top' dan 'custom-background'
-                                const elements = document.getElementsByClassName('fixed-top custom-background');
-                                const iconbar = document.getElementById('icon-bar');
-                                iconbar.style.display = 'block';
-                                // Menambahkan kelas 'col-md-8' pada setiap elemen yang ditemukan
-                                elements.length=1;
-                                for (let i = 0; i < elements.length; i++) {
-                                    elements[i].classList.add('col-md-8');
-                                    elements[i].style.zIndex = '-1';
-                                }
+                                document.getElementById("welcomeMessage").class = "none";
+                                document.getElementById("content-of-main").class = "block";
+                                document.getElementById("image-pernikahan").class = "block";
+                                document.getElementById("title-pernikahan").class = "block";
+                                document.getElementById("loversname").class = "block";
+                                document.getElementById("date-wedding-1").class = "block";
+                                document.querySelectorAll('#prewed [style*="display:none"], #ucapan-doa, #gift [style*="display:none"]').forEach(el => {
+                                    el.style.display = "block";
+                                });
+
                             };
-                        </script>
+                            </script>
                     </div>
                 </div>
             </div>
 
             <div id="intro" class="p-3 text-center m-0">
                 <div id="image-pernikahan" class="photo-frame" style="text-align: center;display:none">
-                    <img class="" style="margin-top: 55px; height: 212px; width: 132px; border-radius: 60px 60px 0px 0px; overflow: hidden;" 
-                            src="https://akad.in/storage/wedding/foto11765445555.jpg">
+                    <img class="" style="margin-top: 55px; height: 212px; width: 145px; border-radius: 60px 60px 0px 0px; overflow: hidden;" 
+                            src="./storage/wedding/Foto Utama.jpeg">
                 </div>
                 <h2 class="text-white" style="margin-top: 20px;display:none" id="title-pernikahan">
                     Pernikahan
@@ -517,7 +524,7 @@ oncontextmenu="return false"
                         </h1>
                         <p id="tanda-3" style="font-size: 18px;">
                             
-                            Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta’ala, insyaaAllah kami akan menyelenggarakan acara pernikahan anak kami :
+                            Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta’ala, insyaaAllah kami akan menyelenggarakan acara pernikahan kami :
                         </p>
 
                         <div class="mx-3" style="margin-top: 50px;">
@@ -545,19 +552,6 @@ oncontextmenu="return false"
                                                 width="50%">
                                         </div>
                                         <div class="mb-5 mt-0 p-0" id="family-profil-1">
-                                            
-                                                                                            
-                                                <a style="text-decoration: none;color:black"
-                                                    class="elementor-button-link elementor-button elementor-size-sm"
-                                                    role="button" href="https://www.instagram.com/bella_abeng"
-                                                    target="_blank" rel="nofollow">
-                                                    <span class="elementor-button-content-wrapper">
-                                                        <span class="elementor-button-icon elementor-align-icon-left">
-                                                            <i aria-hidden="true" class="fa fa-instagram"></i> </span>
-                                                        <span
-                                                            class="elementor-button-text">@<span>akunig</span>
-                                                        </span>
-                                                </a>
                                                                                         <p class="m-0 p-0" style="font-size:14px;font-weight:bold">
                                                 Putri
                                                 Pertama</p>
@@ -591,17 +585,6 @@ oncontextmenu="return false"
                                         </div>
                                         <div class="mb-5 mt-0 p-0" id="family-profil-2">
                                                                                             
-                                                <a style="text-decoration: none;color:black"
-                                                    class="elementor-button-link elementor-button elementor-size-sm"
-                                                    role="button" href="https://www.instagram.com/iqkbalmaulana"
-                                                    target="_blank" rel="nofollow">
-                                                    <span class="elementor-button-content-wrapper">
-                                                        <span class="elementor-button-icon elementor-align-icon-left">
-                                                            <i aria-hidden="true" class="fa fa-instagram"></i> </span>
-                                                        <span
-                                                            class="elementor-button-text">@<span>akunig</span>
-                                                        </span>
-                                                </a>
                                                                                         <p class="m-0 p-0" style="font-size:14px;font-weight:bold">
                                                 Putra Kedua</p>
                                             <p class="m-0 p-0" style="font-size:18px">Bapak H. Munawar<br> &
@@ -725,6 +708,7 @@ oncontextmenu="return false"
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -855,55 +839,7 @@ oncontextmenu="return false"
                                 </div>
                             </div>
                         </div>
-                    </div>
-                
-                                    <div class="text-center m-0 p-0" id="gift">
-                        <h2 id="wedding-gift" style="display:none;font-size: 40px" class="pt-5 text-color-1">Gift</h2>
-                        
-                        <div class="container">
-                            <p class="text-color-1" id="thanks-you" style="font-size:14px;display:none">Terimakasih atas doa dan restu dari anda
-                                semua. Untuk kado cashless maupun fisik bisa dikirimkan di bawah ini</p>
-                            <hr>
-                            <div class="row">
-                                <div id="transfer-rekening" class="col-sm-6 text-color-1" style="display:none">
-                                    <h2 class="m-0 p-0" style="font-size: 30px">Transfer ke Rekening Dana
-                                    </h2>
-                                    
-                                    <p class="m-0 p-0" style="font-size:20px">a.n Bela Putri</p>
-                                    <p class="m-0 p-0" style="font-size:20px">085645637387</p>
-                                    <button type="button" class="btn btn-color-2 mb-5 text-color-1" 
-                                        onclick="myFunction('085645637387')">Copy No. Rekening</button>
-
-                                                                            <h2 class="m-0 p-0" style="font-size: 30px">Transfer ke Rekening
-                                            BRI</h2>
-                                        
-                                        <p class="m-0 p-0" style="font-size:20px">a.n Bela Putri</p>
-                                        <p class="m-0 p-0" style="font-size:20px">227101000768536</p>
-                                        <button type="button" class="btn btn-color-2 mb-5 text-color-1"
-                                            onclick="myFunction('227101000768536')">Copy No. Rekening</button>
-                                    
-                                </div>
-                                <div id="kirim-kado" class="col-sm-6" style="display:none">
-                                    <h2 class="m-0 p-0 text-color-1" style="font-size: 30px">Kirim Kado Fisik Ke Alamat</h2>
-                                    
-                                    <p class="m-0 p-0 text-color-1" style="font-size:14px">Jalan Margo Catur RT 09 RW 03 Desa Wotan Kecamatan Sumberrejo Kabupaten Bojonegoro</p>
-                                    <button type="button" class="btn btn-color-2 mb-5 text-color-1"
-                                        onclick="myFunction('Jalan Margo Catur RT 09 RW 03 Desa Wotan Kecamatan Sumberrejo Kabupaten Bojonegoro')">Copy Alamat</button>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            function myFunction(text) {
-
-                                // Copy the text inside the text field
-                                navigator.clipboard.writeText(text);
-
-                                // Alert the copied text
-                                alert("Copied the text: " + text);
-                            }
-                        </script>
-                    </div>
-                
+                    </div>              
                 <div class="m-0 p-0">
                     <div class="text-center bg-light m-0 py-5" id="special-thanks">
                                                 <h2 class="m-0 p-0 text-white" style="font-size: 20px;">Terimakasih</h2>
@@ -962,11 +898,11 @@ oncontextmenu="return false"
                     // let text = 2025-12-28;
 
                     const [solemnizationmydate, solemnizationindonesiadate, solemnizationarrDate] = getMyWeddingDate(
-                        "2026-5-24");
+                        "2026-5-26");
                     $("#day-wedding-1").text(solemnizationarrDate[0]);
                     $("#date-wedding-2-1").text(solemnizationarrDate[1]);
 
-                    const [mydate, indonesiadate, arrDate] = getMyWeddingDate("2026-5-24");
+                    const [mydate, indonesiadate, arrDate] = getMyWeddingDate("2026-5-26");
                     $("#day-wedding-2").text(arrDate[0]);
                     $("#date-wedding-2-2").text(arrDate[1]);
 
@@ -1016,25 +952,7 @@ oncontextmenu="return false"
     window.onload = function() {
         hideAndRemoveElement();
     };
-</script>
-<script>
-    
-function checkDevice() {
-    const warning = document.getElementById("desktop-warning");
-
-    if (window.innerWidth >= 768) {
-        warning.style.display = "flex";
-        document.body.style.overflow = "hidden";
-    } else {
-        warning.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-}
-
-window.addEventListener("load", checkDevice);
-window.addEventListener("resize", checkDevice);
-</script>
-            
+</script>   
 <script>
     function translatePage() {
       const elements = document.querySelectorAll('#content *'); // Memilih semua elemen di dalam div dengan id 'content'
